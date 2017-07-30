@@ -1,0 +1,160 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+@font-face {
+  font-family: 'munroregular';
+  src: url("../fonts/munro-webfont.woff2") format("woff2"), url("../fonts/munro-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+html {
+  -moz-osx-font-smoothing: grayscale;
+  -ms-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  background: #b5e8e3;
+  font-family: 'munroregular';
+  height: 100%;
+  line-height: 1;
+}
+
+body {
+  min-height: 100%;
+  height: 100%;
+  min-width: 650px;
+}
+
+.burger-builder {
+  display: table;
+  width: 100%;
+  height: 100%;
+  table-layout: fixed;
+}
+
+.burger-builder__left, .burger-builder__right {
+  display: table-cell;
+}
+
+.burger-builder__left {
+  width: 15em;
+  background: white;
+  vertical-align: top;
+}
+
+.burger-builder__right {
+  vertical-align: middle;
+}
+
+.burger-builder-intro__title {
+  font-size: 3em;
+  font-weight: bold;
+}
+
+.hamburger {
+  margin: 0 auto;
+  width: 250px;
+}
+
+.hamburger__top {
+  background: url("../img/burger-top.png") no-repeat center center/contain;
+  height: 60px;
+}
+
+.hamburger__bottom {
+  background: url("../img/burger-bottom.png") no-repeat center center/contain;
+  height: 36px;
+}
+
+.toppings__type {
+  display: none;
+}
+
+.toppings__type--active {
+  display: block;
+}
+
+.holder:empty {
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+}
+
+.holder:empty::before {
+  content: 'Add some toppings :)';
+}
+
+.topping {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 250px 40px;
+  display: block;
+  height: 40px;
+  margin: 0 auto;
+  position: relative;
+  width: 250px;
+}
+
+.topping[data-category="sauce"], .topping[data-category="cheese"] {
+  background-size: 250px 20px;
+  height: 20px;
+}
+
+.topping[data-category="greens"] {
+  background-size: 250px 30px;
+  height: 30px;
+}
+
+.topping[data-name="bacon"] {
+  background-size: 250px 20px;
+  height: 20px;
+}
+
+.options {
+  -webkit-transform: translateX(-100%);
+          transform: translateX(-100%);
+  position: absolute;
+}
+
+.options__option {
+  display: inline-block;
+  height: 40px;
+  position: relative;
+  width: 30px;
+  cursor: pointer;
+}
+
+[data-category="sauce"] .options__option,
+[data-category="cheese"] .options__option {
+  height: 20px;
+}
+
+[data-category="greens"] .options__option {
+  height: 30px;
+}

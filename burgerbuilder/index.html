@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="css/main.css">
+    </head>
+    <body>
+
+        <div class="burger-builder">
+            <div class="burger-builder__left">
+
+            <div class="burger-builder-intro">
+                <h1 class="burger-builder-intro__title">
+                    HAMBURGER BUILDER
+                </h1>
+                <p class="burger-builder-intro__all-hail-the-burger">
+                    I love hamburgers, the world loves hamburgers.
+                    You shall love hamburgers.
+                    Hamburgers...
+                </p>
+            </div>
+
+                <div class="topping-modal" id="topping-modal">
+                    <div class="topping-modal__choice">
+                        <a trigger="meat" class="toppings__type-selector">Meat</a>
+                        <a trigger="cheese" class="toppings__type-selector">Cheese</a>
+                        <a trigger="greens" class="toppings__type-selector">Greens</a>
+                        <a trigger="sauce" class="toppings__type-selector">Sauce</a>
+                    </div>
+                    <div class="topping-modal__options">
+                        <ul id="meat" class="toppings__type toppings__type--active"><!-- PLACEHOLDER --></ul>
+                        <ul id="cheese" class="toppings__type"><!-- PLACEHOLDER --></ul>
+                        <ul id="greens" class="toppings__type"><!-- PLACEHOLDER --></ul>
+                        <ul id="sauce" class="toppings__type"><!-- PLACEHOLDER --></ul>
+                    </div>
+                </div>
+            </div>
+            <div class="burger-builder__right">
+                <div class="hamburger">
+                    <div class="hamburger__top"></div>
+                    <div id="holder" class="holder"></div>
+                    <div class="hamburger__bottom"></div>
+                </div>
+            </div>
+        </div>
+
+        <script src="js/burger-elements.js"></script>
+        <script src="js/burgerbuilder.js"></script>
+    </body>
+</html>
