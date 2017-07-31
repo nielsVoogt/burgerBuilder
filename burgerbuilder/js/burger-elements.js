@@ -24,19 +24,19 @@ const toppings = {
     },
     meat: {
         chicken: {
-            shape: 'img/shapes/meat_1.png',
+            shape: 'img/shapes/chicken.png',
             calories: 2
         },
         cow: {
-            shape: 'img/shapes/meat_1.png',
+            shape: 'img/shapes/cow.png',
             calories: 2
         },
         calf: {
-            shape: 'img/shapes/meat_1.png',
+            shape: 'img/shapes/calf.png',
             calories: 2
         },
         bacon: {
-            shape: 'img/shapes/meat_1.png',
+            shape: 'img/shapes/bacon.png',
             calories: 2
         }
     },

@@ -1,6 +1,6 @@
 
 let pos;
-let burger = [];
+let burger;
 
 let toppingIndex  = 0,
     insertIndex   = 0,
@@ -8,10 +8,9 @@ let toppingIndex  = 0,
 
 const addToppingOptions = document.getElementsByClassName('add-topping');
 const selectToppingType = document.getElementsByClassName('toppings__type-selector');
-const toppingType = document.getElementsByClassName('toppings__type');
 const editToppingButtons = document.getElementsByClassName('options__option');
-
-/// -----------------------------------------------------------------------------------------------
+const clearBurgerButton = document.getElementById('clear-burger-toppings');
+const toppingType = document.getElementsByClassName('toppings__type');
 
 const listenerAssigner = function(nodelist, type, fn) {
     for(var i = 0; i < nodelist.length; i++) {
@@ -48,7 +47,7 @@ const UIController = (function() {
                 return pos = arr.indexOf(arr[i]);
             }
         }
-    }
+    };
 
     const swapArrayElements = function(arr, indexA, indexB) {
         let temp = arr[indexA];
@@ -59,12 +58,13 @@ const UIController = (function() {
     const buildBurger = function() {
         document.getElementById('holder').innerHTML = burger.join("");
         listenerAssigner(editToppingButtons, 'click', editTopping);
+        localStorage.setItem('burger', JSON.stringify(burger));
     };
 
     const insertTopping = function() {
         let el = this.closest('.topping');
         insertIndex = getPositionInArray(burger, el.id) + 1;
-    }
+    };
 
     const removeTopping = function(el) {
         burger.splice(getPositionInArray(burger, el.closest('.topping').id), 1);
@@ -89,8 +89,14 @@ const UIController = (function() {
         createToppingLinks: function(topping, type) {
             for (var i = topping.length - 1; i >= 0; i--) {
                 let toppingName = topping[i].replace('_', ' ');
-                document.getElementById(type).insertAdjacentHTML('beforeend', `<li><a class="add-topping" type="${type}" id=${topping[i]}>${toppingName}</a></li>`)
+                let addToppingTemplate = `<li><a class="add-topping" type="${type}" id=${topping[i]}>${toppingName}</a></li>`;
+                document.getElementById(type).insertAdjacentHTML('beforeend', addToppingTemplate);
             }
+        },
+
+        clearBurger: function() {
+            burger = [];
+            buildBurger();
         },
 
         triggerTypeMenu: function() {
@@ -113,17 +119,19 @@ const UIController = (function() {
             totalCalories = totalCalories + toppingCalories;
             buildBurger();
         },
+
+
     }
 
 })();
-
-/// -----------------------------------------------------------------------------------------------
 
 const BurgerController = (function() {
 
     const setUpEventListeners = function() {
         listenerAssigner(addToppingOptions, 'click', UIController.addTopping);
         listenerAssigner(selectToppingType, 'click', UIController.triggerTypeMenu);
+        clearBurgerButton.addEventListener('click', UIController.clearBurger);
+
     };
 
     const buildToppingNavigation = function() {
@@ -133,10 +141,19 @@ const BurgerController = (function() {
         UIController.createToppingLinks(Object.keys(toppings.greens), 'greens');
     }
 
+    const checkForLocalStorage = function() {
+        if(!localStorage.getItem('burger')) {
+            burger = [];
+        } else {
+            burger = JSON.parse(localStorage.getItem('burger'));
+        }
+    }
+
     return {
         init: function() {
             buildToppingNavigation();
             setUpEventListeners();
+            checkForLocalStorage();
         }
     };
 
