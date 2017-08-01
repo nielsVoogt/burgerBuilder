@@ -1,16 +1,16 @@
 
-let pos;
-let burger;
+let pos, burger;
 
 let toppingIndex  = 0,
     insertIndex   = 0,
     totalCalories = 0;
 
-const addToppingOptions = document.getElementsByClassName('add-topping');
-const selectToppingType = document.getElementsByClassName('toppings__type-selector');
-const editToppingButtons = document.getElementsByClassName('options__option');
-const clearBurgerButton = document.getElementById('clear-burger-toppings');
-const toppingType = document.getElementsByClassName('toppings__type');
+const selectToppingType   = document.getElementsByClassName('toppings__type-selector'),
+      editToppingButtons  = document.getElementsByClassName('options__option'),
+      toppingModalOptions = document.getElementsByClassName('toppings__type'),
+      clearBurgerButton   = document.getElementById('clear-burger-toppings'),
+      addToppingOptions   = document.getElementsByClassName('add-topping'),
+      toppingType         = document.getElementsByClassName('toppings__type');
 
 const listenerAssigner = function(nodelist, type, fn) {
     for(var i = 0; i < nodelist.length; i++) {
@@ -61,11 +61,6 @@ const UIController = (function() {
         localStorage.setItem('burger', JSON.stringify(burger));
     };
 
-    const insertTopping = function() {
-        let el = this.closest('.topping');
-        insertIndex = getPositionInArray(burger, el.id) + 1;
-    };
-
     const removeTopping = function(el) {
         burger.splice(getPositionInArray(burger, el.closest('.topping').id), 1);
         totalCalories = totalCalories - el.closest('.topping').getAttribute('data-calories');
@@ -99,9 +94,11 @@ const UIController = (function() {
             buildBurger();
         },
 
-        triggerTypeMenu: function() {
-            let toppingModalOptions = document.getElementsByClassName('toppings__type');
+        buildBurgerInit: function() {
+            return buildBurger();
+        },
 
+        triggerTypeMenu: function() {
             for(let i = 0; i < toppingModalOptions.length; i++) {
                 toppingModalOptions[i].classList.remove('toppings__type--active');
             }
@@ -119,10 +116,7 @@ const UIController = (function() {
             totalCalories = totalCalories + toppingCalories;
             buildBurger();
         },
-
-
     }
-
 })();
 
 const BurgerController = (function() {
@@ -146,6 +140,7 @@ const BurgerController = (function() {
             burger = [];
         } else {
             burger = JSON.parse(localStorage.getItem('burger'));
+            UIController.buildBurgerInit();
         }
     }
 
